@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chatbot</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+  
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script src="react-basics.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+        
+        function Count({countObj,setCountObj}){
+           
+            const word = countObj.count % 2 === 0 ? 'times' : 'time';
+            function ClickButton(){
+                
+                setCountObj({
+                    ...countObj ,
+                    count: countObj.count + 1
+                })
+            }
+
+            return(
+                <>
+
+                    <button onClick={ClickButton}>Clicked {countObj.count} {word}</button>
+                    
+                </>
+            )
+
+            
+            
+        }
+
+        function Reset({countObj,setCountObj}){
+            function ResetButton(){
+                setCountObj({
+                    count:0
+                })
+            }
+
+            return(
+                <button onClick={ResetButton}>Reset</button>
+            )
+        }
+        
+
+        function App(){
+            const [countObj,setCountObj] = React.useState({
+                count: 0
+            })
+            return(
+                <>
+                    <Count 
+                        countObj = {countObj}
+                        setCountObj = {setCountObj}
+                    />
+                    <Count 
+                        countObj = {countObj}
+                        setCountObj = {setCountObj}
+                    />
+                    <Reset 
+                        countObj = {countObj}
+                        setCountObj = {setCountObj}
+                    />
+                </>
+            )
+        }
+    
+
+        const container = document.querySelector('.js-container')
+        ReactDOM.createRoot(container).render(<App />) 
+    </script>
+  </body>
+</html>
